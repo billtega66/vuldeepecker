@@ -1,0 +1,33 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Data & caches
+data/*.pkl
+data/*.npz
+data/*.npy
+data/split_cache*.pkl
+data/*.7z
+data/*.zip
+*.cache
+*.tmp
+*.bak
+
+# Model artifacts (keep code in model/ but ignore weights/runs)
+model/*.h5
+model/*.pt
+model/*.ckpt*
+model/runs/
+
+# OS
+.DS_Store
+Thumbs.db
