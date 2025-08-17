@@ -1,0 +1,34 @@
+﻿# Default: text files normalized to LF in repo
+*               text eol=lf
+
+# Code (LF)
+*.py            text eol=lf
+*.c             text eol=lf
+*.h             text eol=lf
+*.cpp           text eol=lf
+*.hpp           text eol=lf
+*.cc            text eol=lf
+*.js            text eol=lf
+*.ts            text eol=lf
+*.json          text eol=lf
+*.md            text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+*.sh            text eol=lf
+
+# Windows-only scripts (CRLF)
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ps1           text eol=crlf
+
+# Binary / data (never touch line endings)
+*.png           -text
+*.jpg           -text
+*.jpeg          -text
+*.gif           -text
+*.webp          -text
+*.zip           -text
+*.7z            -text
+*.pkl           -text
+*.npz           -text
+*.npy           -text
