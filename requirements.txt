@@ -3,3 +3,12 @@ scikit-learn
 tensorflow 
 matplotlib
 rich
+gensim
+nltk
+typing 
+os
+re
+json
+sys
+pickle
+random

@@ -5,8 +5,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = {
     "code_dir": os.path.join(BASE_DIR, "data"),
     "tokenizer_path": os.path.join(BASE_DIR, "utils", "tokenizer.pkl"),
-    "embedding_dim": 100,
-    "hidden_dim": 256,
+    "embedding_dim": 300,
+    "hidden_dim": 300,
     "num_layers": 2,
     "batch_size": 32,
     "num_epochs": 10,
@@ -20,5 +20,7 @@ CONFIG = {
     "labels_manifest": os.path.join(BASE_DIR, "data", "labels.json"),  # file we'll create next
 "label_unknown_policy": "manifest",  # enforce ground-truth for all files
     "metrics_dir": os.path.join(BASE_DIR, "metrics_history"),
-    "ignore_split_cache": True
+    "ignore_split_cache": True,
+    "max_len": 50,
+    "dropout": 0.5
 }
