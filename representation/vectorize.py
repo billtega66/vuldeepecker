@@ -72,7 +72,7 @@ def vectorize_and_save():
     tok.fit([token_sequences[i] for i in train_idx])
 
     # Transform every sequence with the train-fitted tokenizer
-    X = tok.transform(token_sequences, CONFIG["max_seq_length"])
+    X = tok.transform(token_sequences, CONFIG["max_len"])
 
     # 4) Save artifacts (NOW include meta)
     _ensure_parent(CONFIG["vector_cache"])

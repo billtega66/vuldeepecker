@@ -21,6 +21,5 @@ CONFIG = {
     "label_unknown_policy": "manifest",  # enforce ground-truth for all files
     "metrics_dir": os.path.join(BASE_DIR, "metrics_history"),
     "ignore_split_cache": True,
-    "max_len": 50,
     "dropout": 0.5
 }
