@@ -13,7 +13,8 @@ This README explains how to **train** the BLSTM model initialized with **Word2Ve
 
 - **Python**: 3.9+  
 - **Required packages**: `tensorflow`, `gensim`, `numpy`, `scikit-learn`
-- **(Optional GPU)**: Make sure your TensorFlow build matches your local CUDA/cuDNN. If unsure, you can use the CPU build of TensorFlow.
+- **(Optional GPU)**: Make sure your TensorFlow build matches your local CUDA/cuDNN. If unsure, you can use the CPU build of TensorFlow. In this case, I am using CUDA 11.8 and cuDNN 8.6.1.
+- **Git LFS**: Install Git LFS and track large artifacts (`.pkl`, `.h5`, `.keras`).
 
 Install:
 ```bash
@@ -100,7 +101,7 @@ Your `utils/tokenizer.py` should implement `CodeTokenizer` with:
 `train_blstm.py` will:
 1. Load `(X, y, meta)` and the `CodeTokenizer`.
 2. Create **group-aware** train/val/test splits using `program_id` (fallback: stratified).
-3. Train **Word2Vec (skip-gram)** on the token sequences reconstructed from `X` and the tokenizer mapping, then build the **Embedding matrix** (PAD=0; UNK ≈ mean vector).
+3. Train **Word2Vec (skip-gram)** on the token sequences reconstructed from `X_train` (optionally `X_val`) so the embedding only sees training-time gadgets, then build the **Embedding matrix** (PAD=0; UNK ≈ mean vector).
 4. Build a **2–3 layer BLSTM** stack + **1 dense (linear)** + **softmax(2)** output, with `dropout=0.5`.
 5. Train with **Adamax (lr=1.0)** for **4 epochs**, `batch_size=64`, class weights balanced.
 6. Save the best model (`.h5`) and cache the test split (`.pkl`).
