@@ -8,6 +8,27 @@ This README explains how to **train** the BLSTM model initialized with **Word2Ve
 > 3) The model (`.h5`) and the cached test split (`.pkl`) are written to `artifacts/` (or your paths).
 
 ---
+## Quick two-CWE GZSL baseline
+
+The `gzsl_simple/` scripts now target the VulDeePecker setting with two vulnerability families: CWE-119 and CWE-399. Gadgets stay in the original feature space (no new encoders); the ridge model learns to map them onto one-hot CWE prototypes and uses a cosine threshold to decide whether a gadget is vulnerable.
+
+```bash
+# 1. Build splits: choose which CWE is seen during training
+python -m gzsl_simple.make_splits --train_cwe 119 --test_cwe 399 \
+    --vector-cache data/vectorized_gadgets.pkl --output_dir splits
+
+# 2. Fit the ridge projection on the seen CWE + non-vulnerable gadgets
+python -m gzsl_simple.train_ridge --train_data splits/train.npy \
+    --val_data splits/val.npy --weights_out artifacts/ridge_W.npy
+
+# 3. Evaluate on the held-out CWE with threshold tuning on validation
+python -m gzsl_simple.eval_gzsl --test_data splits/test.npy \
+    --results_out artifacts/results.json --threshold_mode f1
+```
+
+`make_splits.py` also writes `splits/seen.npy` for reporting seen-class accuracy and `splits/meta.json` with configuration details that the other scripts consume automatically. Running the pipeline a second time with `--train_cwe 399 --test_cwe 119` lets you flip the roles and report both directions.
+
+---
 
 ## 1) Environment
 
